@@ -1,5 +1,10 @@
 {
-  "name": "House of Rugs",
-  "symbol": "HOR",
-  "image": "https://raw.githubusercontent.com/rdevaul/solhack/main/media/HouseOfRugs03.png"
+    "name": "House of Rugs",
+    "symbol": "HOR",
+    "description": "100% Rug! Guaranteed!!",
+    "image": "https://raw.githubusercontent.com/rdevaul/solhack/docs/assets/HouseOfRugs03.png",
+    "extensions": {
+	"website": "https://rdevaul.github.io/solhack/"
+    }
+    
 }
