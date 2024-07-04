@@ -26,11 +26,14 @@ I made the token with:
 The token was created as a token-2022 token with the metadata
 extension. Results:
 
-	Creating token nicyFsRJAWS42LpiaYGNv9rbSGi38UcZoXEA6YGAnwf under program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb
+	Creating token nicyFsRJAWS42LpiaYGNv9rbSGi38UcZoXEA6YGAnwf
+	under program TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb
 
 I set the metadata as follow:
 
-	spl-token initialize-metadata nicyFsRJAWS42LpiaYGNv9rbSGi38UcZoXEA6YGAnwf 'House of Rugs' 'HOR' https://raw.githubusercontent.com/rdevaul/solhack/main/hor-token/metadata.json
+	spl-token initialize-metadata nicyFsRJAWS42LpiaYGNv9rbSGi38UcZoXEA6YGAnwf \
+	'House of Rugs' 'HOR'\
+	https://raw.githubusercontent.com/rdevaul/solhack/main/hor-token/metadata.json
 	
 I minted tokens with:
 
@@ -38,6 +41,7 @@ I minted tokens with:
 	
 I sent tokens to my wallet with:
 
-	spl-token transfer nicyFsRJAWS42LpiaYGNv9rbSGi38UcZoXEA6YGAnwf 100 425VB7Phq4EApekN5qkrZWefeZwGwThThXhXT8SPbvtU --fund-recipient
+	spl-token transfer nicyFsRJAWS42LpiaYGNv9rbSGi38UcZoXEA6YGAnwf 100 \
+	425VB7Phq4EApekN5qkrZWefeZwGwThThXhXT8SPbvtU --fund-recipient
 	
 	
