@@ -1,19 +1,19 @@
-const { Metaplex, keypairIdentity, bundlrStorage } = require("@metaplex-foundation/js");
+const { Metaplex, keypairIdentity, irysStorage } = require("@metaplex-foundation/js");
 const { Connection, clusterApiUrl, Keypair } = require("@solana/web3.js");
 const fs = require("fs");
 
 async function createMetadata() {
   // Configure the connection to the Solana cluster
-  const connection = new Connection(clusterApiUrl("mainnet")); // Use "mainnet-beta" for mainnet
+  const connection = new Connection(clusterApiUrl("mainnet-beta")); // Use "mainnet-beta" for mainnet
 
   // Load your keypair
-  const keypairFile = fs.readFileSync("~/.config/solana/id.json");
+  const keypairFile = fs.readFileSync("/Users/rich/.config/solana/id.json");
   const keypair = Keypair.fromSecretKey(Buffer.from(JSON.parse(keypairFile)));
 
   // Create a Metaplex instance
   const metaplex = Metaplex.make(connection)
     .use(keypairIdentity(keypair))
-    .use(bundlrStorage());
+	.use(irysStorage());
 
   // Your token details
   const tokenMint = "rugfKQvjAGcwE37YcGKboh9ePim6Hc83EK1Y1wBzaPY";

@@ -1,0 +1,10 @@
+{
+    "name": "House of Rugs and Son",
+    "symbol": "HOR2",
+    "description": "200% Rug! Guaranteed!!",
+    "image": "https://raw.githubusercontent.com/rdevaul/solhack/docs/assets/HOR2logo.png",
+    "extensions": {
+	"website": "https://rdevaul.github.io/solhack/"
+    }
+    
+}
