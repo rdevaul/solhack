@@ -156,25 +156,34 @@ Unfortunately, performing the token exchange didn't work - the error I got was:
 
 	Burning tokens from account 2qCeEX17Ho9MLtZv7ps1aBeUvQYtXGv8jaV9RX1kQ3jS, receiving tokens into account 88UkgA9epNEKhEbjK3Xo3hCB3o14QkW1QCMFuBjq7RZS
 	error: send transaction: error: send transaction: RPC response error -32002: Transaction simulation failed: Attempt to load a program that does not exist 
-### Fixes to Broken Solana Foundation Code
+### Fixes to Solana Program Library Code
 
-So, after much wailing and gnashing of teeth, I fixed this. Here is the saga:
+It turns out that there are problems with the current state of the SPL
+repo, at least with respect to `spl-token-upgrade-cli`.  It is a long
+story but here are the salient points:
 
-I confirmed that the cargo-installed `spl-token-upgrade-cli` program
-references an undeployed Solana program.  Well, crap.
+I confirmed that the cargo-installed `spl-token-upgrade-cli`
+references an undeployed Solana program ID for the `token-upgrade`
+program, at least on the main network.
 
-No problem, I thought.  I'll just build from source, deploy my own
-version of the `token-upgrade` program (see below), and then when I
-build the CLI from source it will reference the correct thing.
+To address this, I built the `token-upgrade` program from source, and
+deployed my own version to the main net (see below), and then built
+the CLI from source so that it would reference my deployed program.
 
-Yeah.
+I built and deployed the `token-upgrade` program successfully, though
+successful deployment required a commercial RPC gateway, because the
+free `https://api.mainnet-beta.solana.com/` was not reliable enough to
+complete the deployment. 
 
-I did that, and the result was a program that panics due to some
-horrible Rust type conversion fiasco, presumably due to changes in the
-underlying Solana libraries.  And after reaching out to the original
-maintainers and geting a reference to a pull request that, after
-application, didn't fix the problem, I did something even more
-horible: I hacked the CLI to hard-code the addresses for the
+However, the version of `spl-token-upgrade-cli` that I built from the
+`main` branch of the repo panics when processing Solana addresses
+passed to it on the command line, apparently due to to some horrible
+Rust type conversion fiasco. 
+
+And after reaching out to the original maintainers and geting a
+reference to a pull request that, and after application of that pull
+request didn't fix the problem, I did something even more horible: I
+hacked the CLI source to hard-code the addresses for the
 `create-escrow` function.  The result, when I run it, is:
 
 	original_mint: 5bPiJLZ9sy4x7hEd5VsarMhCZzcnC1k4xY7CieGBr1Xx
@@ -190,7 +199,8 @@ And now to convert tokens!
 
 	../target/debug/spl-token-upgrade exchange 5bPiJLZ9sy4x7hEd5VsarMhCZzcnC1k4xY7CieGBr1Xx nicyFsRJAWS42LpiaYGNv9rbSGi38UcZoXEA6YGAnwf
 	
-The result is an error, but becuse there is a mismatch in the decimals of the old (wormhole) vs new (Solana native) token:
+Womp womp. The result is an error, but becuse there is a mismatch in
+the decimals of the old (wormhole) vs new (Solana native) token:
 
 	original_mint: 5bPiJLZ9sy4x7hEd5VsarMhCZzcnC1k4xY7CieGBr1Xx
 	new_mint: nicyFsRJAWS42LpiaYGNv9rbSGi38UcZoXEA6YGAnwf
