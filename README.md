@@ -1,6 +1,6 @@
 # solhack
 
-![$HOR logo](./docs/assets/HouseOfRugs03.png width=300) ![$HOR2 logo](./docs/assets/HOR2logo.png width=300)
+![$HOR logo](docs/assets/HouseOfRugs03.png | width=300) ![$HOR2 logo](docs/assets/HOR2logo.png | width=300)
 
 solana token experiments - this repo documents various experimets in
 creating Solana tokens and converting Polygon tokens to Solana tokens
